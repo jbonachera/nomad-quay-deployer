@@ -12,7 +12,6 @@ import (
 	"time"
 
 	nomadAPI "github.com/hashicorp/nomad/api"
-	"github.com/prometheus/client_golang/prometheus/promhttp"
 
 	"go.uber.org/zap"
 
@@ -158,7 +157,6 @@ func processBuildNotification(api *nomadAPI.Client, logger *zap.Logger, notifica
 }
 func serveHTTPHealth(logger *zap.Logger) {
 	mux := http.NewServeMux()
-	mux.Handle("/metrics", promhttp.Handler())
 	mux.HandleFunc("/health", func(w http.ResponseWriter, _ *http.Request) {
 		w.WriteHeader(http.StatusOK)
 	})
