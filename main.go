@@ -12,6 +12,7 @@ import (
 	"time"
 
 	nomadAPI "github.com/hashicorp/nomad/api"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 
 	"go.uber.org/zap"
 
@@ -87,6 +88,7 @@ func main() {
 			processBuildNotification(api, logger, job)
 		}
 	}()
+	go serveHTTPHealth(logger)
 	http.Serve(ln, http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		now := time.Now()
 		defer func() {
@@ -96,10 +98,6 @@ func main() {
 				zap.String("remote_address", r.RemoteAddr),
 				zap.Duration("request_duration", time.Since(now)))
 		}()
-		if r.Method == http.MethodGet {
-			w.WriteHeader(200)
-			return
-		}
 		if r.Method != http.MethodPost {
 			w.WriteHeader(http.StatusMethodNotAllowed)
 			return
@@ -156,5 +154,16 @@ func processBuildNotification(api *nomadAPI.Client, logger *zap.Logger, notifica
 				}
 			}
 		}
+	}
+}
+func serveHTTPHealth(logger *zap.Logger) {
+	mux := http.NewServeMux()
+	mux.Handle("/metrics", promhttp.Handler())
+	mux.HandleFunc("/health", func(w http.ResponseWriter, _ *http.Request) {
+		w.WriteHeader(http.StatusOK)
+	})
+	err := http.ListenAndServe("[::]:9000", mux)
+	if err != nil {
+		logger.Error("failed to run healthcheck endpoint", zap.Error(err))
 	}
 }
