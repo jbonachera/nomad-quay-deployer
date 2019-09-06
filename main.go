@@ -96,7 +96,14 @@ func main() {
 				zap.String("remote_address", r.RemoteAddr),
 				zap.Duration("request_duration", time.Since(now)))
 		}()
-
+		if r.Method == http.MethodGet {
+			w.WriteHeader(200)
+			return
+		}
+		if r.Method != http.MethodPost {
+			w.WriteHeader(http.StatusMethodNotAllowed)
+			return
+		}
 		w.Header().Set("Content-Type", "application/json")
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 		notification := BuildSucceededNotification{}
