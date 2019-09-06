@@ -10,6 +10,22 @@
   version = "v0.0.1"
 
 [[projects]]
+  digest = "1:09e47a679b817b4ffd7d208b451caf930e64d347e84b4bac7fe80a256abbedd5"
+  name = "github.com/gorhill/cronexpr"
+  packages = ["."]
+  pruneopts = ""
+  revision = "a557574d6c024ed6e36acc8b610f5f211c91568a"
+  version = "1.0.0"
+
+[[projects]]
+  digest = "1:03168f6041f164c06dc6acaaab4ed3ad1c6088b717c365cec892b35c80f4ffc7"
+  name = "github.com/gorilla/websocket"
+  packages = ["."]
+  pruneopts = ""
+  revision = "c3e18be99d19e6b3e8f1559eea2c161a665c4b6b"
+  version = "v1.4.1"
+
+[[projects]]
   digest = "1:8e3bd93036b4a925fe2250d3e4f38f21cadb8ef623561cd80c3c50c114b13201"
   name = "github.com/hashicorp/errwrap"
   packages = ["."]
@@ -84,6 +100,17 @@
   version = "v1.0.0"
 
 [[projects]]
+  digest = "1:a0af3358a432267bc0839f7b99b9a1eb42f7d6cf00e901859dfaffbfffc02f44"
+  name = "github.com/hashicorp/nomad"
+  packages = [
+    "api",
+    "api/contexts",
+  ]
+  pruneopts = ""
+  revision = "a5c3aaffd1e17e707c217c132a98aa4601a720a2"
+  version = "v0.9.5"
+
+[[projects]]
   digest = "1:1f8b1d2919d8e40644e06eb1cf4f07e46c0cdfb292ae5a95518967d457375e70"
   name = "github.com/hashicorp/vault"
   packages = [
@@ -116,15 +143,15 @@
   version = "v1.1.2"
 
 [[projects]]
-  digest = "1:230e4db8117493b67a1325ac736e78b7db5bc425deaa46a83ee882af934d8c22"
+  digest = "1:375d5279ddd157b35f282ab50f45e194dc753bbf2b02da3678deccd01201da54"
   name = "github.com/pierrec/lz4"
   packages = [
     ".",
     "internal/xxh32",
   ]
   pruneopts = ""
-  revision = "8ef35db8296124c4969aab929c16c91c3cb2c8a0"
-  version = "v2.2.6"
+  revision = "21241797f8cd81af1b8dde3323c6f805799d053e"
+  version = "v2.2.7"
 
 [[projects]]
   digest = "1:4244255905cb95c3c98894d671367f84a6292608ae528936fe46ba9c86f68393"
@@ -135,12 +162,12 @@
   version = "v1.0.0"
 
 [[projects]]
-  digest = "1:8e203bd2659a3fd76fd28090599c9279bff69003c4d50982cb651b5ae90287cd"
+  digest = "1:7d8a5f1eaf603734839fbc4716d9ceda97574e096d7032487c63c6dcea835097"
   name = "github.com/vx-labs/mqtt-broker"
   packages = ["vaultacme"]
   pruneopts = ""
-  revision = "19f580c430665300788971f16a2f142ff6688685"
-  version = "v0.0.64"
+  revision = "631c8d5eaf1f20ea6b07939307fa6ad70957ffef"
+  version = "v0.0.67"
 
 [[projects]]
   digest = "1:e6ff7840319b6fda979a918a8801005ec2049abca62af19211d96971d8ec3327"
@@ -234,6 +261,7 @@
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
+    "github.com/hashicorp/nomad/api",
     "github.com/vx-labs/mqtt-broker/vaultacme",
     "go.uber.org/zap",
   ]
